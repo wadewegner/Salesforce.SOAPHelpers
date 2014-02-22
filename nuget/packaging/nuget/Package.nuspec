@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>WadeWegner.Salesforce.SOAPHelpers</id>
+    <title>WadeWegner.Salesforce.SOAPHelpers</title>
+    <version>$version$</version>
+    <authors>wadewegner</authors>
+    <owners>wadewegner</owners>
+    <licenseUrl>https://raw.github.com/wadewegner/Salesforce.SOAPHelpers/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/wadewegner/Salesforce.SOAPHelpers/</projectUrl>
+    <iconUrl>https://raw.github.com/wadewegner/Salesforce.SOAPHelpers/master/nuget/packaging/avatar.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>This NuGet provides a .NET library for interacting with Salesforce's Force.com SOAP APIs.</description>
+    <releaseNotes></releaseNotes>
+    <copyright>Copyright 2014</copyright>
+    <tags>salesforce forcedotcom force.com force soap api</tags>
+    <dependencies>
+      <dependency id="Microsoft.Bcl" version="1.1.6" />
+      <dependency id="Microsoft.Bcl.Async" version="1.0.165" />
+      <dependency id="Microsoft.Bcl.Build" version="1.0.13" />
+      <dependency id="Microsoft.Net.Http" version="2.2.18" />
+      <dependency id="Newtonsoft.Json" version="5.0.8" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="..\..\..\src\Salesforce.SOAPHelpers\bin\Debug\WadeWegner.Salesforce.SOAPHelpers.dll" target="lib" />
+    <file src="..\..\..\src\Salesforce.SOAPHelpers\bin\Debug\WadeWegner.Salesforce.SOAPHelpers.pdb" target="lib" />
+    <file src="..\..\..\src\Salesforce.SOAPHelpers\*.cs" target="src" />
+    <file src="..\..\..\src\Salesforce.SOAPHelpers\Models\*.cs" target="src" />
+  </files>
+</package>
