@@ -1,5 +1,7 @@
 # Salesforce.SOAPHelpers
 
+This .NET library provides a way for interacting with Salesforce's Force.com SOAP APIs.
+
 ### Getting Started
 
 1. Install the NuGet package: `Install-Package WadeWegner.Salesforce.SOAPHelpers`
