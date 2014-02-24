@@ -8,7 +8,7 @@ This .NET library provides a way for interacting with Salesforce's Force.com SOA
 
         Install-Package WadeWegner.Salesforce.SOAPHelpers
         
-2. Create an instance of the **SalesforceClient**:
+2. Create an instance of the `SalesforceClient`:
 
         var salesforceClient = new SalesforceClient();
 
