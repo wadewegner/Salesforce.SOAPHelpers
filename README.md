@@ -17,12 +17,14 @@ This .NET library provides a way for interacting with Salesforce's Force.com SOA
 
         var customObject = "MyCustomObject";
         var createObjectResult =
-          await salesforceClient.CreateCustomObject(customObject, loginResult.SessionId, loginResult.MetadataServerUrl);`
+          await salesforceClient.CreateCustomObject(
+            customObject, loginResult.SessionId, loginResult.MetadataServerUrl);`
 
 4. Create the custom field by calling `CreateCustomField`:
 
         var customField = "MyCustomField";
         var createFieldResult =
-          await salesforceClient.CreateCustomField(customObject, customField, loginResult.SessionId, loginResult.MetadataServerUrl);
+          await salesforceClient.CreateCustomField(
+            customObject, customField, loginResult.SessionId, loginResult.MetadataServerUrl);
 
 Enjoy!
