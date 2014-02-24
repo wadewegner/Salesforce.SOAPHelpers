@@ -4,14 +4,17 @@ This .NET library provides a way for interacting with Salesforce's Force.com SOA
 
 ### Getting Started
 
-1. Install the NuGet package: `Install-Package WadeWegner.Salesforce.SOAPHelpers`
-2. Create an instance of the `SalesforceClient`:
+1. Install the NuGet package:
 
-  `var salesforceClient = new SalesforceClient();`
+        Install-Package WadeWegner.Salesforce.SOAPHelpers
+        
+2. Create an instance of the **SalesforceClient**:
+
+        var salesforceClient = new SalesforceClient();
 
 3. Call login and accept the results:
 
-  `var loginResult = await salesforceClient.Login(_username, _password, _organizationId);`
+        var loginResult = await salesforceClient.Login(_username, _password, _organizationId);
 
 3. Create the custom object by calling `CreateCustomObject`:
 
