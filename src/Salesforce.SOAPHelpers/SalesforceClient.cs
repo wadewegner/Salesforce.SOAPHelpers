@@ -116,15 +116,16 @@ namespace WadeWegner.Salesforce.SOAPHelpers
             throw new Exception("Failed create object");
         }
 
-        public async Task<CreateResult> CreateCustomField(string customObject, string fieldName, string sessionId, string metadataServerUrl)
+        public async Task<CreateResult> CreateCustomField(string customObject, string fieldName, string sessionId, string metadataServerUrl, bool externalId = false)
         {
             var customFieldQuery = string.Format(
 @"<metadata xsi:type=""CustomField"" xmlns:cmd=""http://soap.sforce.com/2006/04/metadata"">
-	<fullName>{0}.{1}__c</fullName>
+	<fullName>{0}.{1}</fullName>
 	<label>{1}</label>
 	<length>100</length>
-    <type>Text</type>
-</metadata>", customObject + "__c", fieldName); // TODO: pass this in for flexibility
+	<type>Text</type>
+	<externalId>{2}</externalId>
+</metadata>", customObject, fieldName, externalId); // TODO: pass this in for flexibility
 
             var customFieldResponse = await Create(customFieldQuery, sessionId, metadataServerUrl);
             var resultXml = XDocument.Parse(customFieldResponse);

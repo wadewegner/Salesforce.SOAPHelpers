@@ -30,7 +30,8 @@ namespace WadeWegner.Salesforce.SOAPHelpers.FunctionalTests
         public async void CreateObject()
         {
             var customObject = "MyCustomObject";
-            var customField = "MyCustomField";
+            var standardObject = "Account";
+            var customField = "MyCustomField__c";
 
             var salesforceClient = new SalesforceClient();
             var loginResult = await salesforceClient.Login(_username, _password, _organizationId);
@@ -38,8 +39,11 @@ namespace WadeWegner.Salesforce.SOAPHelpers.FunctionalTests
             var createObjectResult = await salesforceClient.CreateCustomObject(customObject, loginResult.SessionId, loginResult.MetadataServerUrl);
             Assert.IsNotNull(createObjectResult);
 
-            var createFieldResult = await salesforceClient.CreateCustomField(customObject, customField, loginResult.SessionId, loginResult.MetadataServerUrl);
+            var createFieldResult = await salesforceClient.CreateCustomField(customObject + "__c", customField, loginResult.SessionId, loginResult.MetadataServerUrl);
             Assert.IsNotNull(createFieldResult);
+
+            var createFieldResult2 = await salesforceClient.CreateCustomField(standardObject, customField, loginResult.SessionId, loginResult.MetadataServerUrl);
+            Assert.IsNotNull(createFieldResult2);
         }
     }
 }
