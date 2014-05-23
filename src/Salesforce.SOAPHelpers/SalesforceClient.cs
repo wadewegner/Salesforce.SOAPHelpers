@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -166,6 +167,36 @@ namespace WadeWegner.Salesforce.SOAPHelpers
             using (var stringReader = new StringReader(result.ToString()))
             {
                 var createResult = (CreateResult) serializer.Deserialize(stringReader);
+                return createResult;
+            }
+        }
+
+        public async Task<T> CreateConnectedApp<T>(string fullName, string label, string contactEmail, string callbackUrl, string sessionId, string metadataServerUrl)
+        {
+            var createConnectedApQuery = string.Format(
+@"<metadata xsi:type=""ConnectedApp"" xmlns:cmd=""http://soap.sforce.com/2006/04/metadata"">
+	<fullName>{0}</fullName>
+	<version>29.0</version>
+	<label>{1}</label>
+	<contactEmail>{2}</contactEmail>
+	<oauthConfig>
+		<callbackUrl>{3}</callbackUrl>
+		<scopes>Full</scopes>
+        <scopes>RefreshToken</scopes>
+	</oauthConfig>
+</metadata>", fullName, label, contactEmail, callbackUrl);
+
+            var customObjectResponse = await Create(createConnectedApQuery, sessionId, metadataServerUrl);
+
+            var resultXml = XDocument.Parse(customObjectResponse);
+            var result = resultXml.Descendants(XNamespace.Get("http://soap.sforce.com/2006/04/metadata") + "result").First();
+
+            //if (result == null) return null;
+
+            var serializer = new XmlSerializer(typeof(T));
+            using (var stringReader = new StringReader(result.ToString()))
+            {
+                var createResult = (T)serializer.Deserialize(stringReader);
                 return createResult;
             }
         }

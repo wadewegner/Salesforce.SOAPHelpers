@@ -27,7 +27,7 @@ namespace WadeWegner.Salesforce.SOAPHelpers.FunctionalTests
         }
 
         [Test]
-        public async void CreateObject()
+        public async void CreateObjectAndField()
         {
             var customObject = "MyCustomObject";
             var standardObject = "Account";
@@ -44,6 +44,28 @@ namespace WadeWegner.Salesforce.SOAPHelpers.FunctionalTests
 
             var createFieldResult2 = await salesforceClient.CreateCustomField(standardObject, customField, loginResult.SessionId, loginResult.MetadataServerUrl);
             Assert.IsNotNull(createFieldResult2);
+        }
+
+        [Test]
+        public async void CreateConnectedApp()
+        {
+            var salesforceClient = new SalesforceClient();
+            var loginResult = await salesforceClient.Login(_username, _password, _organizationId);
+
+            var fullName = "fullName";
+            var label = "label";
+            var contactEmail = "contact@email.com";
+            var callbackUrl = "callback://url";
+
+            var connectedAppResult = await salesforceClient.CreateConnectedApp<dynamic>(
+                fullName,
+                label,
+                contactEmail,
+                callbackUrl,
+                loginResult.SessionId,
+                loginResult.MetadataServerUrl);
+
+            Assert.IsNotNull(connectedAppResult);
         }
     }
 }
