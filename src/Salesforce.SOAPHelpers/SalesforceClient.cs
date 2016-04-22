@@ -191,10 +191,14 @@ namespace WadeWegner.Salesforce.SOAPHelpers
             var resultXml = XDocument.Parse(customObjectResponse);
             var result = resultXml.Descendants(XNamespace.Get("http://soap.sforce.com/2006/04/metadata") + "result").First();
 
-            //if (result == null) return null;
+            var xRoot = new XmlRootAttribute
+            {
+                ElementName = "result",
+                Namespace = "http://soap.sforce.com/2006/04/metadata"
+            };
 
-            var serializer = new XmlSerializer(typeof(T));
-            using (var stringReader = new StringReader(result.ToString()))
+            var serializer = new XmlSerializer(typeof(T), xRoot);
+            using (var stringReader = new StringReader(result.ToString().Trim()))
             {
                 var createResult = (T)serializer.Deserialize(stringReader);
                 return createResult;
